@@ -6,16 +6,25 @@ export default function ProductForm({
   handleFormShowing,
   handleSetProducts,
   id,
+  titleInit,
+  quantityInit,
+  priceInit,
 }) {
   if (!formShowing) return null;
 
-  const [title, setTitle] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [price, setPrice] = useState(0);
+  console.log(titleInit, priceInit);
+
+  const [title, setTitle] = useState(titleInit || "");
+  const [quantity, setQuantity] = useState(quantityInit || null);
+  const [price, setPrice] = useState(priceInit || null);
 
   const handleFormSubmit = async () => {
     try {
-      const body = { title, quantity, price };
+      const body = {
+        title: title,
+        quantity: quantity,
+        price: price,
+      };
       let products;
       if (id) {
         products = await ProductService.update(id, body);
@@ -39,7 +48,6 @@ export default function ProductForm({
             type="text"
             id="product-name"
             value={title}
-            defaultValue={title}
             required
           />
         </div>
@@ -53,7 +61,6 @@ export default function ProductForm({
             min="0"
             step="0.01"
             value={price}
-            defaultValue={price}
             required
           />
         </div>
@@ -66,7 +73,6 @@ export default function ProductForm({
             name="product-quantity"
             min="0"
             value={quantity}
-            defaultValue={quantity}
             required
           />
         </div>
