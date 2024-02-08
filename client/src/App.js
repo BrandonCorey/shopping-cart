@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ProductList from "./components/product-list";
 import AddProduct from "./components/add-product";
 import Header from "./components/header";
-import Product from "./components/product";
 import ProductService from "./services/products";
 import CartService from "./services/cart";
 
@@ -25,7 +24,6 @@ export default function App() {
 
   const handleGetCartItems = async () => {
     const cart = await CartService.getAll();
-    console.log(cart);
     handleSetCartItems(cart);
   };
 
@@ -51,7 +49,6 @@ export default function App() {
       <main>
         <ProductList
           products={products}
-          Product={Product}
           handleGetProducts={handleGetProducts}
           handleGetCartItems={handleGetCartItems}
         />
