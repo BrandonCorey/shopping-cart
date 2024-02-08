@@ -14,8 +14,12 @@ export default function App() {
   };
 
   const handleGetProducts = async () => {
-    const products = await ProductService.getAll();
-    handleSetProducts(products);
+    try {
+      const products = await ProductService.getAll();
+      handleSetProducts(products);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSetCartItems = (cartItems) => {
@@ -23,24 +27,20 @@ export default function App() {
   };
 
   const handleGetCartItems = async () => {
-    const cart = await CartService.getAll();
-    handleSetCartItems(cart);
+    try {
+      const cart = await CartService.getAll();
+      handleSetCartItems(cart);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
-    try {
-      handleGetProducts();
-    } catch (error) {
-      console.error(error);
-    }
+    handleGetProducts();
   }, []);
 
   useEffect(() => {
-    try {
-      handleGetCartItems();
-    } catch (error) {
-      console.error(error);
-    }
+    handleGetCartItems();
   }, []);
 
   return (
