@@ -1,12 +1,22 @@
 import React from "react";
 import CartItem from "./cart-item";
+import CartService from "../services/cart";
 
-export default function Header({ cartItems }) {
+export default function Header({ cartItems, handleGetCartItems }) {
   const getCartSum = () => {
     return cartItems.reduce(
       (total, current) => total + current.price * current.quantity,
       0,
     );
+  };
+
+  const handleCheckout = async () => {
+    try {
+      await CartService.checkout();
+      handleGetCartItems();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -43,7 +53,7 @@ export default function Header({ cartItems }) {
                 </tr>
               </tfoot>
             </table>
-            <div className="checkout-button">
+            <div className="checkout-button" onClick={handleCheckout}>
               <button className="checkout">Checkout</button>
             </div>
           </>

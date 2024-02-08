@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <div id="app">
-      <Header cartItems={cartItems} />
+      <Header cartItems={cartItems} handleGetCartItems={handleGetCartItems} />
       <main>
         <ProductList
           products={products}

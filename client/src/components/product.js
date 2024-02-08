@@ -29,12 +29,9 @@ export default function Product({
 
   const handleAddToCart = async () => {
     try {
-      const added = await CartService.add(_id);
-      if (!added) new Error("Could not add to cart");
-      else {
-        handleGetCartItems();
-        handleGetProducts();
-      }
+      await CartService.add(_id);
+      handleGetCartItems();
+      handleGetProducts();
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +44,11 @@ export default function Product({
         <p className="price">$ {price}</p>
         <p className="quantity">{`${quantity} left in stock`}</p>
         <div className="actions product-actions">
-          <button className="add-to-cart" onClick={handleAddToCart}>
+          <button
+            className="add-to-cart"
+            onClick={handleAddToCart}
+            disabled={quantity < 1 ? true : false}
+          >
             Add to cart
           </button>
           <button className="edit" onClick={() => handleFormShowing(true)}>
@@ -65,6 +66,9 @@ export default function Product({
             handleFormShowing={handleFormShowing}
             formShowing={formShowing}
             id={_id}
+            titleInit={title}
+            quantityInit={quantity}
+            priceInit={price}
           />
         </div>
       ) : null}
