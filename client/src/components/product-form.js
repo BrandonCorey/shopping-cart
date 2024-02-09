@@ -13,28 +13,37 @@ export default function ProductForm({
   if (!isFormShowing) return null;
 
   const [title, setTitle] = useState(titleInit || "");
-  const [quantity, setQuantity] = useState(quantityInit || "");
-  const [price, setPrice] = useState(priceInit || "");
+  const [quantity, setQuantity] = useState(quantityInit || "0");
+  const [price, setPrice] = useState(priceInit || "0");
 
   const clearForm = () => {
     setTitle("");
-    setPrice("");
-    setQuantity("");
+    setPrice(0);
+    setQuantity(0);
+  };
+
+  const isValidSubmission = () => {
+    return title.trim() !== "" && quantity.trim() !== "" && price.trim() !== "";
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!isValidSubmission()) return null;
+
       const body = {
         title: title,
         quantity: quantity,
         price: price,
       };
+
       if (id) {
         await ProductService.update(id, body);
+        handleFormShowing(false);
       } else {
         await ProductService.create(body);
         clearForm();
+        handleFormShowing(false);
       }
 
       await handleFetchProducts();
@@ -82,7 +91,11 @@ export default function ProductForm({
           />
         </div>
         <div className="actions form-actions">
-          <button type="submit" onClick={handleFormSubmit}>
+          <button
+            type="submit"
+            onClick={handleFormSubmit}
+            disabled={!isValidSubmission()}
+          >
             {id ? "Save" : "Add"}
           </button>
           <button type="button" onClick={() => handleFormShowing(false)}>
