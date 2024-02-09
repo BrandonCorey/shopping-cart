@@ -4,7 +4,7 @@ import ProductService from "../services/products";
 export default function ProductForm({
   formShowing,
   handleFormShowing,
-  handleSetProducts,
+  handleGetProducts,
   id,
   titleInit,
   quantityInit,
@@ -12,27 +12,32 @@ export default function ProductForm({
 }) {
   if (!formShowing) return null;
 
-  console.log(titleInit, priceInit);
-
   const [title, setTitle] = useState(titleInit || "");
-  const [quantity, setQuantity] = useState(quantityInit || null);
-  const [price, setPrice] = useState(priceInit || null);
+  const [quantity, setQuantity] = useState(quantityInit || "");
+  const [price, setPrice] = useState(priceInit || "");
 
-  const handleFormSubmit = async () => {
+  const clearForm = () => {
+    setTitle("");
+    setPrice("");
+    setQuantity("");
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
     try {
       const body = {
         title: title,
         quantity: quantity,
         price: price,
       };
-      let products;
       if (id) {
-        products = await ProductService.update(id, body);
+        await ProductService.update(id, body);
       } else {
-        products = await ProductService.create(body);
+        await ProductService.create(body);
+        clearForm();
       }
 
-      handleSetProducts(products);
+      await handleGetProducts();
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +49,7 @@ export default function ProductForm({
         <div className="input-group">
           <label htmlFor="product-name">Product Name:</label>
           <input
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(() => e.target.value)}
             type="text"
             id="product-name"
             value={title}
@@ -54,7 +59,7 @@ export default function ProductForm({
         <div className="input-group">
           <label htmlFor="product-price">Price:</label>
           <input
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(() => e.target.value)}
             type="number"
             id="product-price"
             name="product-price"
@@ -67,7 +72,7 @@ export default function ProductForm({
         <div className="input-group">
           <label htmlFor="product-quantity">Quantity:</label>
           <input
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={(e) => setQuantity(() => e.target.value)}
             type="number"
             id="product-quantity"
             name="product-quantity"

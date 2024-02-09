@@ -10,7 +10,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const handleSetProducts = async (products) => {
-    setProducts(products);
+    setProducts(() => products);
   };
 
   const handleGetProducts = async () => {
@@ -23,7 +23,7 @@ export default function App() {
   };
 
   const handleSetCartItems = (cartItems) => {
-    setCartItems(cartItems);
+    setCartItems(() => cartItems);
   };
 
   const handleGetCartItems = async () => {
@@ -52,7 +52,7 @@ export default function App() {
           handleGetProducts={handleGetProducts}
           handleGetCartItems={handleGetCartItems}
         />
-        <AddProduct handleSetProducts={handleSetProducts} />
+        <AddProduct handleGetProducts={handleGetProducts} />
       </main>
     </div>
   );

@@ -42,7 +42,7 @@ export default function Header({ cartItems, handleGetCartItems }) {
               </thead>
               <tbody>
                 {cartItems.map((cartItem) => {
-                  return <CartItem key={cartItem.id} cartItem={cartItem} />;
+                  return <CartItem key={cartItem._id} cartItem={cartItem} />;
                 })}
               </tbody>
               <tfoot>

@@ -14,7 +14,7 @@ export default function Product({
   const [formShowing, setFormShowing] = useState(false);
 
   const handleFormShowing = (status) => {
-    setFormShowing(status);
+    setFormShowing(() => status);
   };
 
   const handleDeleteProduct = async () => {
@@ -64,6 +64,7 @@ export default function Product({
           <h3>Edit Product</h3>
           <ProductForm
             handleFormShowing={handleFormShowing}
+            handleGetProducts={handleGetProducts}
             formShowing={formShowing}
             id={_id}
             titleInit={title}

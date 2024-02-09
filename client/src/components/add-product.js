@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ProductForm from "./product-form";
 
-export default function AddProduct({ handleSetProducts }) {
+export default function AddProduct({ handleGetProducts }) {
   const [formShowing, setFormShowing] = useState(false);
 
   const handleFormShowing = (status) => {
-    setFormShowing(status);
+    setFormShowing(() => status);
   };
 
   return (
@@ -22,7 +22,7 @@ export default function AddProduct({ handleSetProducts }) {
           <ProductForm
             formShowing={formShowing}
             handleFormShowing={handleFormShowing}
-            handleSetProducts={handleSetProducts}
+            handleGetProducts={handleGetProducts}
           />{" "}
         </>
       ) : null}
