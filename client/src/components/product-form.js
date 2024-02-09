@@ -86,7 +86,7 @@ export default function ProductForm({
             {id ? "Save" : "Add"}
           </button>
           <button type="button" onClick={() => handleFormShowing(false)}>
-            Cancel
+            Collapse
           </button>
         </div>
       </form>
