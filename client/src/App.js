@@ -9,50 +9,45 @@ export default function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  const handleSetProducts = async (products) => {
-    setProducts(() => products);
-  };
-
-  const handleGetProducts = async () => {
+  const handleFetchProducts = async () => {
     try {
       const products = await ProductService.getAll();
-      handleSetProducts(products);
+      setProducts(() => products);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleSetCartItems = (cartItems) => {
-    setCartItems(() => cartItems);
-  };
-
-  const handleGetCartItems = async () => {
+  const handleFetchCartItems = async () => {
     try {
       const cart = await CartService.getAll();
-      handleSetCartItems(cart);
+      setCartItems(() => cart);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    handleGetProducts();
+    handleFetchProducts();
   }, []);
 
   useEffect(() => {
-    handleGetCartItems();
+    handleFetchCartItems();
   }, []);
 
   return (
     <div id="app">
-      <Header cartItems={cartItems} handleGetCartItems={handleGetCartItems} />
+      <Header
+        cartItems={cartItems}
+        handleFetchCartItems={handleFetchCartItems}
+      />
       <main>
         <ProductList
           products={products}
-          handleGetProducts={handleGetProducts}
-          handleGetCartItems={handleGetCartItems}
+          handleFetchProducts={handleFetchProducts}
+          handleFetchCartItems={handleFetchCartItems}
         />
-        <AddProduct handleGetProducts={handleGetProducts} />
+        <AddProduct handleFetchProducts={handleFetchProducts} />
       </main>
     </div>
   );

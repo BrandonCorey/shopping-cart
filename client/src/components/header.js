@@ -2,7 +2,7 @@ import React from "react";
 import CartItem from "./cart-item";
 import CartService from "../services/cart";
 
-export default function Header({ cartItems, handleGetCartItems }) {
+export default function Header({ cartItems, handleFetchCartItems }) {
   const getCartSum = () => {
     return cartItems.reduce(
       (total, current) => total + current.price * current.quantity,
@@ -13,7 +13,7 @@ export default function Header({ cartItems, handleGetCartItems }) {
   const handleCheckout = async () => {
     try {
       await CartService.checkout();
-      handleGetCartItems();
+      handleFetchCartItems();
     } catch (error) {
       console.error(error);
     }

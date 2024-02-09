@@ -8,8 +8,8 @@ export default function Product({
   title,
   quantity,
   price,
-  handleGetProducts,
-  handleGetCartItems,
+  handleFetchProducts,
+  handleFetchCartItems,
 }) {
   const [formShowing, setFormShowing] = useState(false);
 
@@ -20,8 +20,8 @@ export default function Product({
   const handleDeleteProduct = async () => {
     try {
       await ProductService.remove(_id);
-      handleGetProducts();
-      handleGetCartItems();
+      handleFetchProducts();
+      handleFetchCartItems();
     } catch (error) {
       console.error(error);
     }
@@ -30,8 +30,8 @@ export default function Product({
   const handleAddToCart = async () => {
     try {
       await CartService.add(_id);
-      handleGetCartItems();
-      handleGetProducts();
+      handleFetchCartItems();
+      handleFetchProducts();
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +64,7 @@ export default function Product({
           <h3>Edit Product</h3>
           <ProductForm
             handleFormShowing={handleFormShowing}
-            handleGetProducts={handleGetProducts}
+            handleFetchProducts={handleFetchProducts}
             formShowing={formShowing}
             id={_id}
             titleInit={title}

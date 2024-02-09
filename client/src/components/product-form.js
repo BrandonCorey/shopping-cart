@@ -4,7 +4,7 @@ import ProductService from "../services/products";
 export default function ProductForm({
   formShowing,
   handleFormShowing,
-  handleGetProducts,
+  handleFetchProducts,
   id,
   titleInit,
   quantityInit,
@@ -37,7 +37,7 @@ export default function ProductForm({
         clearForm();
       }
 
-      await handleGetProducts();
+      await handleFetchProducts();
     } catch (error) {
       console.error(error);
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProductForm from "./product-form";
 
-export default function AddProduct({ handleGetProducts }) {
+export default function AddProduct({ handleFetchProducts }) {
   const [formShowing, setFormShowing] = useState(false);
 
   const handleFormShowing = (status) => {
@@ -22,7 +22,7 @@ export default function AddProduct({ handleGetProducts }) {
           <ProductForm
             formShowing={formShowing}
             handleFormShowing={handleFormShowing}
-            handleGetProducts={handleGetProducts}
+            handleFetchProducts={handleFetchProducts}
           />{" "}
         </>
       ) : null}

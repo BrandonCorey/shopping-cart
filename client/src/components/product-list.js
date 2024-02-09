@@ -3,8 +3,8 @@ import Product from "./product";
 
 export default function ProductList({
   products,
-  handleGetProducts,
-  handleGetCartItems,
+  handleFetchProducts,
+  handleFetchCartItems,
 }) {
   return (
     <div className="product-listing">
@@ -14,8 +14,8 @@ export default function ProductList({
           <Product
             key={product._id}
             {...product}
-            handleGetProducts={handleGetProducts}
-            handleGetCartItems={handleGetCartItems}
+            handleFetchProducts={handleFetchProducts}
+            handleFetchCartItems={handleFetchCartItems}
           />
         ))}
       </ul>
