@@ -23,7 +23,7 @@ export default function ProductForm({
   };
 
   const isValidSubmission = () => {
-    return title.trim() !== "" && quantity.trim() !== "" && price.trim() !== "";
+    return title.trim() !== "" && quantity !== "" && price !== "";
   };
 
   const handleFormSubmit = async (e) => {
