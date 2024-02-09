@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductService from "../services/products";
 
 export default function ProductForm({
-  formShowing,
+  isFormShowing,
   handleFormShowing,
   handleFetchProducts,
   id,
@@ -10,7 +10,7 @@ export default function ProductForm({
   quantityInit,
   priceInit,
 }) {
-  if (!formShowing) return null;
+  if (!isFormShowing) return null;
 
   const [title, setTitle] = useState(titleInit || "");
   const [quantity, setQuantity] = useState(quantityInit || "");

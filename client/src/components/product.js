@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ProductForm from "./product-form";
 import ProductService from "../services/products";
 import CartService from "../services/cart";
 
@@ -10,13 +9,8 @@ export default function Product({
   price,
   handleFetchProducts,
   handleFetchCartItems,
+  handleFormShowing,
 }) {
-  const [formShowing, setFormShowing] = useState(false);
-
-  const handleFormShowing = (status) => {
-    setFormShowing(() => status);
-  };
-
   const handleDeleteProduct = async () => {
     try {
       await ProductService.remove(_id);
@@ -38,41 +32,25 @@ export default function Product({
   };
 
   return (
-    <li key={_id} className="product">
-      <div className="product-details">
-        <h3>{title}</h3>
-        <p className="price">$ {price}</p>
-        <p className="quantity">{`${quantity} left in stock`}</p>
-        <div className="actions product-actions">
-          <button
-            className="add-to-cart"
-            onClick={handleAddToCart}
-            disabled={quantity < 1 ? true : false}
-          >
-            Add to cart
-          </button>
-          <button className="edit" onClick={() => handleFormShowing(true)}>
-            Edit
-          </button>
-        </div>
-        <button className="delete-button" onClick={handleDeleteProduct}>
-          <span>X</span>
+    <div className="product-details">
+      <h3>{title}</h3>
+      <p className="price">$ {price}</p>
+      <p className="quantity">{`${quantity} left in stock`}</p>
+      <div className="actions product-actions">
+        <button
+          className="add-to-cart"
+          onClick={handleAddToCart}
+          disabled={quantity < 1 ? true : false}
+        >
+          Add to cart
+        </button>
+        <button className="edit" onClick={() => handleFormShowing(true)}>
+          Edit
         </button>
       </div>
-      {formShowing ? (
-        <div className="edit-form">
-          <h3>Edit Product</h3>
-          <ProductForm
-            handleFormShowing={handleFormShowing}
-            handleFetchProducts={handleFetchProducts}
-            formShowing={formShowing}
-            id={_id}
-            titleInit={title}
-            quantityInit={quantity}
-            priceInit={price}
-          />
-        </div>
-      ) : null}
-    </li>
+      <button className="delete-button" onClick={handleDeleteProduct}>
+        <span>X</span>
+      </button>
+    </div>
   );
 }

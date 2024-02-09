@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductForm from "./product-form";
 
 export default function AddProduct({ handleFetchProducts }) {
-  const [formShowing, setFormShowing] = useState(false);
+  const [isFormShowing, setFormShowing] = useState(false);
 
   const handleFormShowing = (status) => {
     setFormShowing(() => status);
@@ -11,16 +11,16 @@ export default function AddProduct({ handleFetchProducts }) {
   return (
     <div className="add-form visible">
       <p>
-        {formShowing ? null : (
+        {isFormShowing ? null : (
           <button onClick={() => handleFormShowing(true)}>Add A product</button>
         )}
       </p>
-      {formShowing ? (
+      {isFormShowing ? (
         <>
           {" "}
           <h3>Add Product</h3>
           <ProductForm
-            formShowing={formShowing}
+            isFormShowing={isFormShowing}
             handleFormShowing={handleFormShowing}
             handleFetchProducts={handleFetchProducts}
           />{" "}

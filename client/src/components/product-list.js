@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./product";
+import ProductWrapper from "./product-wrapper";
 
 export default function ProductList({
   products,
@@ -11,9 +11,9 @@ export default function ProductList({
       <h2>Products</h2>
       <ul className="product-list">
         {products.map((product) => (
-          <Product
+          <ProductWrapper
             key={product._id}
-            {...product}
+            product={product}
             handleFetchProducts={handleFetchProducts}
             handleFetchCartItems={handleFetchCartItems}
           />
