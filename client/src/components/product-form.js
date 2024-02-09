@@ -13,8 +13,8 @@ export default function ProductForm({
   if (!isFormShowing) return null;
 
   const [title, setTitle] = useState(titleInit || "");
-  const [quantity, setQuantity] = useState(quantityInit || "0");
-  const [price, setPrice] = useState(priceInit || "0");
+  const [quantity, setQuantity] = useState(quantityInit || "");
+  const [price, setPrice] = useState(priceInit || "");
 
   const clearForm = () => {
     setTitle("");
